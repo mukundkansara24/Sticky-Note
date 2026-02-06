@@ -6,19 +6,16 @@ function AddNotes() {
     const dispatch = useDispatch();
     return (
         <>
-        <h1>Add Notes</h1>
-        <textarea className="border-2 resize-none w-50 h-50" value={input}
+        {/* <h1>Add Notes</h1> */}
+        {/* <textarea className="border-2 resize-none w-50 h-50" value={input}
         placeholder="Type your note here"
         onChange={(e) => {
             setInput(e.target.value);
         }}
-        ></textarea>
+        ></textarea> */}
         <button className="border-2 rounded p-0.5"
         onClick={() => {
-            if(input === '' ) {
-                return;
-            }
-            dispatch(addNotes({description: input}));
+            dispatch(addNotes());
             setInput('');
         }}
         >Add Note</button>

@@ -12,7 +12,8 @@ const initialState = {
         {
             id: '1',
             description: 'This is first note',
-            color: colors[colorInd]
+            color: colors[colorInd],
+            colorShort: colorInd
         }
     ]
 }
@@ -24,8 +25,8 @@ const noteSlice = createSlice({
         addNotes: (state, action) => {
             let note = {
                 id: nanoid(),
-                description: action.payload.description,
-                color: colors[colorInd]
+                color: colors[colorInd],
+                colorShort: colorInd
             }
             colorInd = (colorInd + 1) % 3;
             state.noteList.push(note);
@@ -40,10 +41,19 @@ const noteSlice = createSlice({
                 }
                 return note;
             })
+        },
+        changeColor: (state, action) => {
+            state.noteList = state.noteList.map((note) => {
+                if (note.id === action.payload.id) {
+                    note.color = colors[action.payload.colors];
+                    note.colorShort = action.payload.colors;
+                }
+                return note;
+            })
         }
     }
 })
 
-export const { addNotes, deleteNotes, editNotes } = noteSlice.actions;
+export const { addNotes, deleteNotes, editNotes, changeColor } = noteSlice.actions;
 
 export const noteReducer = noteSlice.reducer;
